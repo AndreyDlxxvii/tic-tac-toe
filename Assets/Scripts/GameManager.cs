@@ -30,22 +30,24 @@ public class GameManager : MonoBehaviour
         switch (_flag)
         {
             case true:
-                if (_flagsInts[i - 1] != 1)
+                if (_flagsInts[i - 1] == 0)
                 {
-                    Cells[i - 1].image.sprite = Toe;
+                    Cells[i - 1].image.sprite = Tac;
                     _flag = false;
                     _flagsInts[i - 1] = 1;
                 }
                 break;
             case false:
-                if (_flagsInts[i - 1] != 1)
+                if (_flagsInts[i - 1] == 0)
                 {
-                    Cells[i - 1].image.sprite = Tac;
+                    Cells[i - 1].image.sprite = Toe;
                     _flag = true;
-                    _flagsInts[i - 1] = 1;
+                    _flagsInts[i - 1] = 2;
                 }
                 break;
         }
+
+
 
     }
 }

@@ -10,12 +10,13 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public Button[] Cells;
-    public Sprite Tac;
-    public Sprite Toe;
+    public Sprite Cross;
+    public Sprite Zero;
 
     private bool _flag = true;
-    private int[] _flagsIntsTac = new int [9] {0, 0, 0, 0, 0, 0, 0, 0, 0};
-    private int[] _flagsIntsToe = new int [9] {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    private bool _checkGameOver = true;
+    private int[] _flagsIntsCross = new int [9] {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    private int[] _flagsIntsZero = new int [9] {0, 0, 0, 0, 0, 0, 0, 0, 0};
     private int[] _check = new int[9] {1, 1, 1, 0, 0, 0, 0, 0, 0};
     private int[] _check1 = new int[9] {1, 0, 0, 1, 0, 0, 1, 0, 0};
     private int[] _check2 = new int[9] {0, 0, 0, 0, 0, 0, 1, 1, 1};
@@ -30,6 +31,10 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        for (int i = 0; i < Cells.Length; i++)
+        {
+            Cells[i].gameObject.SetActive(true);
+        }
         _checksList.Add(_check);
         _checksList.Add(_check1);
         _checksList.Add(_check2);
@@ -48,40 +53,46 @@ public class GameManager : MonoBehaviour
 
     public void OnClick(int i)
     {
-        switch (_flag)
+        if (_checkGameOver)
         {
-            case true:
-                if (_flagsIntsTac[i - 1] == 0 && _flagsIntsToe[i - 1] == 0)
-                {
-                    Cells[i - 1].image.sprite = Tac;
-                    _flag = false;
-                    _flagsIntsTac[i - 1] = 1;
-                }
-
-                break;
-            case false:
-                if (_flagsIntsTac[i - 1] == 0 && _flagsIntsToe[i - 1] == 0)
-                {
-                    Cells[i - 1].image.sprite = Toe;
-                    _flag = true;
-                    _flagsIntsToe[i - 1] = 1;
-                }
-
-                break;
-        }
-
-        for (int j = 0; j < 8; j++)
-        {
-            if (_checksList[j].SequenceEqual(_flagsIntsTac))
+            switch (_flag)
             {
-                print("it works, tac win!");
+                case true:
+                    if (_flagsIntsCross[i - 1] == 0 && _flagsIntsZero[i - 1] == 0)
+                    {
+                        Cells[i - 1].image.sprite = Cross;
+                        _flag = false;
+                        _flagsIntsCross[i - 1] = 1;
+                    }
+
+                    break;
+                case false:
+                    if (_flagsIntsCross[i - 1] == 0 && _flagsIntsZero[i - 1] == 0)
+                    {
+                        Cells[i - 1].image.sprite = Zero;
+                        _flag = true;
+                        _flagsIntsZero[i - 1] = 1;
+                    }
+
+                    break;
             }
 
-            if (_checksList[j].SequenceEqual(_flagsIntsToe))
+            for (int j = 0; j < 8; j++)
             {
-                print("it works toe win!");
+                if (_checksList[j].SequenceEqual(_flagsIntsCross))
+                {
+                    print("it works, Cross win!");
+                    _checkGameOver = false;
+                }
+
+                if (_checksList[j].SequenceEqual(_flagsIntsZero))
+                {
+                    print("it works Zero win!");
+                    _checkGameOver = false;
+                }
             }
         }
+        
 
     }
 

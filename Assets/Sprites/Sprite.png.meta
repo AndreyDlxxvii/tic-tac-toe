@@ -4,10 +4,10 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: 3003395050984487837
-    second: Tac
+    second: Cross
   - first:
       213: 1486927034149124126
-    second: Toe
+    second: Zero
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tac
+      name: Cross
       rect:
         serializedVersion: 2
         x: 0
@@ -118,7 +118,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Toe
+      name: Zero
       rect:
         serializedVersion: 2
         x: 686

@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public Sprite Zero;
 
     private bool _flag = true;
+    private int _countCross = 0;
+    private int _countZero = 0;
     private bool _checkGameOver = true;
     private int[] _flagsIntsCross = new int [9] {0, 0, 0, 0, 0, 0, 0, 0, 0};
     private int[] _flagsIntsZero = new int [9] {0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -79,17 +81,29 @@ public class GameManager : MonoBehaviour
 
             for (int j = 0; j < 8; j++)
             {
-                if (_checksList[j].SequenceEqual(_flagsIntsCross))
+                for (int k = 0; k < 9; k++)
                 {
-                    print("it works, Cross win!");
-                    _checkGameOver = false;
+                    if (_checksList[k]==_flagsIntsCross)
+                    {
+                        _countCross++;
+                    }
+                    else if (_checksList[k] == _flagsIntsZero)
+                    {
+                        _countZero++;
+                    }
+                    if (_countCross==3)
+                    {
+                        print("it works, Cross win!");
+                        _checkGameOver = false;
+                    }
+                    
+                    if (_countZero==3)
+                    {
+                        print("it works Zero win!");
+                        _checkGameOver = false;
+                    }
                 }
-
-                if (_checksList[j].SequenceEqual(_flagsIntsZero))
-                {
-                    print("it works Zero win!");
-                    _checkGameOver = false;
-                }
+                
             }
         }
         

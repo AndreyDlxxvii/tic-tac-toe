@@ -10,10 +10,12 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public Button[] Cells;
-    public Sprite Cross;
-    public Sprite Zero;
+    public Sprite CrossSprite;
+    public Sprite ZeroSprite;
+    public Button StartButton;
+    public Button ChangeWhoFirst;
 
-    private bool _flag = true;
+    private bool _flagWhoFirst = true;
     private int _countCross = 0;
     private int _countZero = 0;
     private bool _checkGameOver = true;
@@ -33,10 +35,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach (var t in Cells)
-        {
-            t.gameObject.SetActive(true);
-        }
+        ChangeWhoFirst.image.sprite = CrossSprite;
         _checksList.Add(_check);
         _checksList.Add(_check1);
         _checksList.Add(_check2);
@@ -45,6 +44,22 @@ public class GameManager : MonoBehaviour
         _checksList.Add(_check5);
         _checksList.Add(_check6);
         _checksList.Add(_check7);
+    }
+
+    public void WhoStartFirst()
+    {
+        if (_flagWhoFirst)
+        {
+            ChangeWhoFirst.image.sprite = ZeroSprite;
+            _flagWhoFirst = false;
+        }
+        else
+        {
+            ChangeWhoFirst.image.sprite = CrossSprite;
+            _flagWhoFirst = true;
+        }
+
+        
     }
 
     // Update is called once per frame
@@ -57,21 +72,21 @@ public class GameManager : MonoBehaviour
     {
         if (_checkGameOver)
         {
-            switch (_flag)
+            switch (_flagWhoFirst)
             {
                 case true:
                     if (_flagsIntsCross[i - 1] == 0 && _flagsIntsZero[i - 1] == 0)
                     {
-                        Cells[i - 1].image.sprite = Cross;
-                        _flag = false;
+                        Cells[i - 1].image.sprite = CrossSprite;
+                        _flagWhoFirst = false;
                         _flagsIntsCross[i - 1] = 1;
                     }
                     break;
                 case false:
                     if (_flagsIntsCross[i - 1] == 0 && _flagsIntsZero[i - 1] == 0)
                     {
-                        Cells[i - 1].image.sprite = Zero;
-                        _flag = true;
+                        Cells[i - 1].image.sprite = ZeroSprite;
+                        _flagWhoFirst = true;
                         _flagsIntsZero[i - 1] = 1;
                     }
                     break;
@@ -117,6 +132,16 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void SetButtonActive()
+    {
+        foreach (var t in Cells)
+        {
+            t.gameObject.SetActive(true);
+        }
+        StartButton.gameObject.SetActive(false);
+        ChangeWhoFirst.gameObject.SetActive(false);
     }
 
 }

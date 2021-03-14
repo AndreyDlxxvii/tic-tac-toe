@@ -30,20 +30,19 @@ public class GameManager : MonoBehaviour
     private readonly int[] _check6 = new int[9] {0, 0, 0, 1, 1, 1, 0, 0, 0};
     private readonly int[] _check7 = new int[9] {0, 0, 1, 0, 0, 1, 0, 0, 1};
 
-    private readonly List<int[]> _checksList = new List<int[]>();
+    private readonly List<int[]> _controlList = new List<int[]>();
 
-    // Start is called before the first frame update
     void Start()
     {
         ChangeWhoFirst.image.sprite = CrossSprite;
-        _checksList.Add(_check);
-        _checksList.Add(_check1);
-        _checksList.Add(_check2);
-        _checksList.Add(_check3);
-        _checksList.Add(_check4);
-        _checksList.Add(_check5);
-        _checksList.Add(_check6);
-        _checksList.Add(_check7);
+        _controlList.Add(_check);
+        _controlList.Add(_check1);
+        _controlList.Add(_check2);
+        _controlList.Add(_check3);
+        _controlList.Add(_check4);
+        _controlList.Add(_check5);
+        _controlList.Add(_check6);
+        _controlList.Add(_check7);
     }
 
     public void WhoStartFirst()
@@ -60,12 +59,6 @@ public class GameManager : MonoBehaviour
         }
 
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void OnClick(int i)
@@ -90,8 +83,10 @@ public class GameManager : MonoBehaviour
                         _flagsIntsZero[i - 1] = 1;
                     }
                     break;
+                    
             }
             CheckToWin();
+            //ComputerIntel();
         }
     }
 
@@ -103,11 +98,11 @@ public class GameManager : MonoBehaviour
             _countZero = 0;
             for (int k = 0; k < 9; k++)
             {
-                if (_checksList[j][k]==_flagsIntsCross[k] && _checksList[j][k]==1)
+                if (_controlList[j][k]==_flagsIntsCross[k] && _controlList[j][k]==1)
                 {
                     _countCross++;
                 }
-                if (_checksList[j][k]==_flagsIntsZero[k] && _checksList[j][k]==1)
+                if (_controlList[j][k]==_flagsIntsZero[k] && _controlList[j][k]==1)
                 {
                     _countZero++;
                 }
@@ -117,7 +112,6 @@ public class GameManager : MonoBehaviour
                     _checkGameOver = false;
                     break;
                 }
-                    
                 if (_countZero==3)
                 {
                     print("it works Zero win!");
@@ -125,7 +119,6 @@ public class GameManager : MonoBehaviour
                     break;
                 }
             }
-                
         }
     }
 
@@ -134,7 +127,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    public void SetButtonActive()
+    private void SetButtonActive()
     {
         foreach (var t in Cells)
         {
@@ -144,5 +137,12 @@ public class GameManager : MonoBehaviour
         ChangeWhoFirst.gameObject.SetActive(false);
     }
 
+    private void ComputerIntel()
+    {
+        if (_flagWhoFirst)
+        {
+            
+        }
+    }
 }
     

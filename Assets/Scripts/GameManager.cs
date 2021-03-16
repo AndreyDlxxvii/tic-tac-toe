@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     private readonly int[] _check7 = new int[9] {0, 0, 1, 0, 0, 1, 0, 0, 1};
 
     private readonly List<int[]> _controlList = new List<int[]>();
+    private List<int[]> _iiCrossList = new List<int[]>();
+    private List<int[]> _iiZeroList = new List<int[]>();
 
     void Start()
     {
@@ -100,10 +102,12 @@ public class GameManager : MonoBehaviour
             {
                 if (_controlList[j][k]==_flagsIntsCross[k] && _controlList[j][k]==1)
                 {
+                    _iiCrossList.Add(_controlList[j]);
                     _countCross++;
                 }
                 if (_controlList[j][k]==_flagsIntsZero[k] && _controlList[j][k]==1)
                 {
+                    _iiZeroList.Add(_controlList[j]);
                     _countZero++;
                 }
                 if (_countCross==3)
@@ -141,8 +145,25 @@ public class GameManager : MonoBehaviour
     {
         if (_flagWhoFirst)
         {
+            for (int j = 0; j < 8; j++)
+            {
+                for (int i = 0; i < 9; i++)
+                {
+                    if (_flagsIntsCross[i] == _controlList[j][i])
+                    {
+                    
+                    }
+                }
+            }
             
         }
+        // else
+        // {
+        //     for (int i = 0; i < 9; i++)
+        //     {
+        //         
+        //     }
+        // }
     }
 }
     
